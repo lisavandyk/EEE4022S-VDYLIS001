@@ -1,0 +1,4 @@
+I = imread('2021-05-22_Experiment-01_NRG_Msm-GFP_Exp1.czi - 2021-05-22_Experiment-01_NRG_Msm-GFP_Exp1_t001_c001.jpg');
+%I_gray = ind2gray(I,map);
+imshow(I);
+imageinfo
