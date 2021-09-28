@@ -6,32 +6,32 @@ function [J] = fluorescent_threshold(I, numRows, numCols)
 
 
 %Create output image matrix
-temp_image = zeros([numRows, numCols]);
+temp_image = false([numRows, numCols]);
 
 %Find histogram limits of image
 
-[counts_if, binLocations_if] = imhist(I);
+%[counts, binLocations] = imhist(I);
 
 %Find last location of histogram
-for i = length(binLocations_if):-1:1
-   if counts_if(i) > 1
-       r_max = i + 1;
-       break
-   end
-end
+%for i = length(binLocations):-1:1
+%   if counts(i) > 1
+%       r_max = i + 1;
+%       break
+%   end
+%end
 
 %Due to the nature of the fluorescent microscopy - the bacteria is going to
 %be the brightest 
 %let threshold be two grey levels smaller than r_max
 
-T = r_max - 2;
+T = 20;
 
 %Populate temp_image with binary mask values
 
 for i = 1:numCols
    for j = 1:numCols
-      if I > T
-          temp_image(i,j) = 1;
+      if I(i,j) > T
+          temp_image(i,j) = true;
       end
    end
 end
