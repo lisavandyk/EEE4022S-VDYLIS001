@@ -28,7 +28,7 @@ T = 20;
 
 %Populate temp_image with binary mask values
 
-for i = 1:numCols
+for i = 1:numRows
    for j = 1:numCols
       if I(i,j) > T
           temp_image(i,j) = true;
