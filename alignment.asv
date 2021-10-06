@@ -34,22 +34,37 @@ end
 %Morphological dilation of image using 3x3 SE kernel
 
 dilate = false(numRows, numCols);
-%No real valuable information will be missed from one pixel border of image
-%- edge will be dilated anyway
-for i = 2:(numRows-1)
-   for j = 2:(numCols-1)
-       if mask(i,j) == true
-             dilate(i,j) = true;
-             dilate(i+1,j) = true;
-             dilate(i,j+1) = true;
-             dilate(i+1,j+1) = true;
-             %3x3
-             dilate(i-1,j-1) = true;
-             dilate(i-1,j) = true;
-             dilate(i-1,j+1) = true;
-             dilate(i,j-1) = true;
-             dilate(i+1,j-1) = true;
-       end
+
+for i = 1:numRows
+   for j = 1:numCols
+      if mask(i,j)== true
+          %Specia
+          if j == 1
+              if i == 1
+            
+         dilate(i,j) = true;
+         dilate(i+1,j) = true;
+         dilate(i,j+1) = true;
+         dilate(i+1,j+1) = true;
+         %3x3
+         if j == 1
+             if i == 1
+                 %This condition will be met ONLY for the first pixel in the
+                 %image; do nothing
+             elseif i == numRows
+                 dilate
+             else
+                %Pixels on the left-most side of the image 
+                dilate(i-1,j) = true;
+                dilate(i-1,j+1) = true;
+             end
+         elseif i == 1
+         dilate(i-1,j-1) = true;
+         dilate(i-1,j) = true;
+         dilate(i-1,j+1) = true;
+         dilate(i,j-1) = true;
+         dilate(i+1,j-1) = true;
+      end
    end
 end
 
